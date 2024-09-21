@@ -100,3 +100,43 @@ class Library {
     return book;
   }
 }
+
+class Student {
+  constructor(name) {
+    this.name = name;
+    this.marks = {};
+  }
+
+  addMark(mark, subject) {
+     if(this.marks[subject] === undefined && mark > 1 && mark < 6) {
+      this.marks[subject] = [];
+    }
+
+    if(mark > 1 && mark < 6) {
+      this.marks[subject].push(mark);
+    }
+  }
+
+  getAverageBySubject(subject) {
+    let subjectAverage = 0;
+    if(this.marks[subject] === undefined) {
+      return subjectAverage;
+    }
+    let sumSubjectGrade = this.marks[subject].reduce((item, acc) => item + acc, 0);
+    return subjectAverage = sumSubjectGrade / this.marks[subject].length;
+  }
+
+  getAverage () {
+    let subjects = Object.keys(this.marks);
+    let sumSubjectsGrade = 0;
+
+    for(let i = 0; i < subjects.length; i++) {
+      sumSubjectsGrade += this.getAverageBySubject(subjects[i]);
+    }
+    
+    if(sumSubjectsGrade === 0 || sumSubjectsGrade === undefined) {
+      return 0;
+    }
+    return sumSubjectsGrade / subjects.length;
+  }
+}
